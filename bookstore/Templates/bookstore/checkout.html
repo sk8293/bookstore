@@ -1,0 +1,17 @@
+{% extends 'bookstore/main.html' %}
+
+{% block content %}
+  <h1>Checkout Confirmation</h1>
+  
+  <h2>View Your Cart Items in cart menu before checkout</h2>
+  <ul>
+    {% for books in Cart.books.all %}
+      <li>{{ books.title }} - {{ books.price }}</li>
+    {% endfor %}
+  </ul>
+  
+  <form method="post" action="{% url 'checkout' %}">
+    {% csrf_token %}
+    <button type="submit">Checkout</button>
+  </form>
+{% endblock %}

@@ -92,3 +92,19 @@ def addtocart(request,pk):
             )
         reqcart.books.add(book)    
     return redirect('/')
+
+
+def checkout(request):
+    if request.method == 'POST':
+        cart = Cart.objects.get(user=request.user)
+        order = Customer(user=request.user)
+        order.save()
+        for item in cart.books.all():
+            order.add(item)
+        cart.books.clear()
+        
+        # Redirect to the order confirmation page
+        return redirect('/')
+    
+    # If the request method is GET, render the checkout page
+    return render(request, 'bookstore/checkout.html')

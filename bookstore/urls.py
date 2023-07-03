@@ -10,4 +10,6 @@ urlpatterns =[
     path('register/', registerPage,name='register'),
     path('logout/', logoutPage,name='logout'),
     path('addtocart/<str:pk>', addtocart,name='addtocart'),
+    path('checkout/', checkout,name='checkout'),
+    
 ]
